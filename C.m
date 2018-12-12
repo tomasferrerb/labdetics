@@ -1,4 +1,4 @@
-Settings;
+confetings;
 
 
 %%Abrir imagen para comparar errores 
