@@ -4,6 +4,7 @@ confetings;
 %%Abrir imagen para comparar errores 
 imgOriginal = imread(img);
 [rowC,colC,profC] = size(imgOriginal);
+imgOriginal = incluirRedundancias(img);
 vectorOriginal =img2vector(imgOriginal);
 matrizOriginal = vector2packet(vectorOriginal, l_paquete);
 paquetes_erroneos=0; 
@@ -13,8 +14,10 @@ matriz=[];
 
 %Recibir paquetes 
 %Configurar puertos
-
-udpC = udp(ipA,portA,'LocalPort',portC);
+clc
+disp(['Redundancias calculadas L_paquete = ' num2str(l_paquete)])
+%%
+udpC = udp(ipA,portA,'LocalPort',portC,'Timeout',30);
 udpC.InputBufferSize = 1000000;
 fopen(udpC);
 
@@ -45,9 +48,11 @@ end
 fclose(udpC);
 
 %%
+clc
+disp(['Métricas L_paquete = ' num2str(l_paquete)])
 delay=tiempo_final;
 disp(['Delay = ' num2str(delay) '[s]'])
-goodput=8*total_datos/tiempo_final;
+goodput=8*total_datos/tiempo_final*0.6; % por 0.6 por no considerar redundancias
 disp(['Goodput = ' num2str(goodput/1000) '[kbps]'])
 PER=paquetes_erroneos/(N-1);
 disp(['PER = ' num2str(PER)])
@@ -56,6 +61,6 @@ disp(['PER = ' num2str(PER)])
 vector  = packet2vector(matriz);
 image = vector2img(vector, row, col);
 image=corregirErrores(image);
-BER=row*col*3-sum(sum(sum(imgOriginal==image)));
+BER=row*col*3-sum(sum(sum(imgOriginal(:,:,1:3)==image)));
 disp(['BER = ' num2str(BER)])
 imshow(uint8(image)); 
