@@ -1,8 +1,8 @@
-Settings; 
+confetings; 
 %%%%%%%%%%%%%ABRIR IMAGEN%%%%%%%%%%%%
 imgR= imread(img);
 [row,col,prof] = size(imgR);
-matrix5 = incluirRebundancias(img)
+matrix5 = incluirRedundancias(img)
 %%%%%%%%%%%%PASAR MATRIZ RGB A VECTOR%%%%%%%%%%%%%%
 vector = img2vector(matrix5);
 
