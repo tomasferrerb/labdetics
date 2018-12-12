@@ -2,9 +2,9 @@ Settings;
 %%%%%%%%%%%%%ABRIR IMAGEN%%%%%%%%%%%%
 imgR= imread(img);
 [row,col,prof] = size(imgR);
-
+matrix5 = incluirRebundancias(img)
 %%%%%%%%%%%%PASAR MATRIZ RGB A VECTOR%%%%%%%%%%%%%%
-vector = img2vector(imgR);
+vector = img2vector(matrix5);
 
 %%%%%%%%%%%%%CANTIDAD DE PAQUETES%%%%%%%%%%%%%%%%
 l = size(vector);
@@ -30,20 +30,20 @@ matriz = vector2packet(vector, l_paquete); %matriz donde cada fila contiene un p
 
 
 %%Create UDP Object
-udpA = udp(ipB,portB,'LocalPort',portA);
-udpA.OutputBufferSize = 10000000000;
+udpAwifi = udp(ipB,portB,'LocalPort',portAwifi);
+udpAwifi.OutputBufferSize = 10000000000;
 %%Connect to UDP Object
-fopen(udpA);
+fopen(udpAwifi);
 
 %ENVIAR TODOS LOS PAQUETES 
-fwrite(udpA,paquete_ini,'uint8')
+fwrite(udpAwifi,paquete_ini,'uint8')
 for i=1:Npaquetes
-    fwrite(udpA, matriz(i,:) , 'uint8')
+    fwrite(udpAwifi, matriz(i,:) , 'uint8')
     %pause;
 end
 paquete_end=[Npaquetes+1 row col Npaquetes+1];
-fwrite(udpA,paquete_end,'uint8')
-fclose(udpA);
+fwrite(udpAwifi,paquete_end,'uint8')
+fclose(udpAwifi);
 
 %%Create UDP Object
 udpA = udp(ipC,portC,'LocalPort',portA);

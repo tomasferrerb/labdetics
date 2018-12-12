@@ -55,7 +55,7 @@ disp(['PER = ' num2str(PER)])
 
 vector  = packet2vector(matriz);
 image = vector2img(vector, row, col);
-image=corregirErrores(image);
+image=
 BER=row*col*3-sum(sum(sum(imgOriginal==image)));
 disp(['BER = ' num2str(BER)])
 imshow(uint8(image)); 
