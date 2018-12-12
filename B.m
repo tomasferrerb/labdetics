@@ -1,4 +1,5 @@
 Settings;
+xSettings;
 
 matriz=[];
 
@@ -18,15 +19,15 @@ while 1
         row=vec(2);
         col=vec(3);
         N=vec(4);
-        sendAudio1(vec.');
-        pause(head_dt(end)+pixel_dt(end)*4+1.5);
+        %sendAudio1(vec.');
+        %pause(head_dt(end)+pixel_dt(end)*4+1.5);
         %pause(5);
     elseif ~(vec(1)== N)    
         matriz(vec(1),:)=vec;
         count=count+1;
         total_datos=total_datos+vec(2);
-        sendAudio1(vec.');
-        pause(head_dt(end)+pixel_dt(end)*vec(2)+1.5);
+        %sendAudio1(vec.');
+        %pause(head_dt(end)+pixel_dt(end)*vec(2)+1.5);
         %pause(5);
     else
         break
@@ -36,6 +37,10 @@ end
 fclose(udpB);
 
 vector  = packet2vector(matriz);
-image = vector2img(vector, row, col);
+%image = vector2img(vector, row, col);
+image = reshape(vector,[row,col,5]);
+
+imgR = image;
+emisor(imgR);
 
 imshow(uint8(image));
