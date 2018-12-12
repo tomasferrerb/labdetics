@@ -43,4 +43,4 @@ image = reshape(vector,[row,col,5]);
 imgR = image(:,:,1:3);
 emisor(imgR);
 
-imshow(uint8(image));
+imshow(uint8(imgR));
