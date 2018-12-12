@@ -1,5 +1,5 @@
 function soni = emisor(imgR)%recibe vector de pixeles
-xSettings;
+confetings;
 %============================ Inits 
 [row, col ,prof]= size(imgR); 
 count = 0;
