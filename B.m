@@ -36,11 +36,11 @@ end
 fclose(udpB);
 
 vector  = packet2vector(matriz);
-%image = vector2img(vector, row, col);
-image = reshape(vector,[row,col,5]);
-
-
+image = vector2img(vector, row, col);
+%image = reshape(vector,[row,col,5]);
 imgR = image(:,:,1:3);
-emisor(imgR);
 
 imshow(uint8(imgR));
+%% Emisor de audio
+
+emisor(imgR);

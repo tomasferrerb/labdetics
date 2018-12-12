@@ -29,7 +29,7 @@ paquete_ini=[0 row col Npaquetes+1];
 matriz = vector2packet(vector, l_paquete); %matriz donde cada fila contiene un paquete
 
 
-%%Create UDP Object
+%% Create UDP Object
 udpAwifi = udp(ipB,portB,'LocalPort',portAwifi);
 udpAwifi.OutputBufferSize = 10000000000;
 %%Connect to UDP Object
