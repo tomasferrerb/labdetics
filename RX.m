@@ -1,7 +1,7 @@
 % close all
 % clear
 % clc
-SettingsRX;
+confetings;
 %==================================== Grabar
 disp('Presionar tecla para grabar')
 pause
@@ -165,5 +165,5 @@ subplot(1,2,1)
  subplot(1,2,2)
  imshow(cat(3,red8',green8',blue8'));
  xlabel('Recibida')
-%imshow(cat(3,red8',green8',blue8'));
+image_audio = (cat(3,red8',green8',blue8'));
 %xlabel('Recibida')
