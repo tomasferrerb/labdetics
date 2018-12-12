@@ -2,11 +2,12 @@ confetings;
 
 
 %%Abrir imagen para comparar errores 
-imgOriginal = imread(img);
+imgOriginal0 = imread(img);
 [rowC,colC,profC] = size(imgOriginal);
 imgOriginal = incluirRedundancias(img);
 vectorOriginal =img2vector(imgOriginal);
 matrizOriginal = vector2packet(vectorOriginal, l_paquete);
+matrizOriginal2 = vector2packet(img2vector(imgOriginal0),l_paquete);
 paquetes_erroneos=0; 
 
 
@@ -71,22 +72,55 @@ imshow(uint8(image));
 %%  Recibir Audio 
 
 %faltan metricas 
-
+tic;
 RX; 
+delay_audio = toc;
 %%
+BER_sinFEC=row*col*3-sum(sum(sum(imgOriginal(:,:,1:3)==image_audio)));
+BER_sinFEC=BER_sinFEC/(row*col*3);
+packetes_audio = vector2packet(img2vector(image_audio),l_paquete);
+PER_audio=0;
+[packetes largo_packetes]=size(packetes_audio);
+for i=1:packetes
+   if sum(~(matrizOriginal2(i,:) == packetes_audio(i,:)))>0
+     PER_audio=PER_audio+1;
+   end
+end
+PER_audio=PER_audio/packetes;
+
+%% Mostrar métricas
 matriz_FEC=[];
 matriz_FEC(:,:,1:3)= image_audio;
 matriz_FEC(:,:,4)=image5(:,:,4);
 matriz_FEC(:,:,5) = image5(:,:,5);
 image_final = corregirErrores(matriz_FEC);
+
+BER_conFEC=row*col*3-sum(sum(sum(imgOriginal(:,:,1:3)==image_final)));
+BER_conFEC=BER_conFEC/(row*col*3);
+packetes_audio_FEC = vector2packet(img2vector(image_final),l_paquete);
+PER_audio=0;
+[packetes largo_packetes]=size(packetes_audio);
+for i=1:packetes
+   if sum(~(matrizOriginal2(i,:) == packetes_audio(i,:)))>0
+     PER_audio=PER_audio+1;
+   end
+end
+PER_audio=PER_audio/packetes;
+
+
+
 imshow(uint8(image_final));
 
-subplot(1,3,1)
+subplot(1,4,1)
  imshow(imread(img));
  xlabel('Normal')
- subplot(1,3,2)
+ subplot(1,4,2)
  imshow(uint8(image_audio));
  xlabel('Recibida')
-subplot(1,3,3);
+subplot(1,4,3);
 imshow(uint8(uint8(image_final)));
-%xlabel('Recibida')
+xlabel('Corregida')
+
+% subplot(1,4,4);
+% imshow(uint8(uint8(abs(image_final-image_audio))));
+% xlabel('Diferencias')
