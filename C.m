@@ -70,7 +70,7 @@ imshow(uint8(image));
 
 %%  Recibir Audio 
 
-%faltan metricas
+%faltan metricas 
 
 RX; 
 matriz_FEC= cat(5, image_audio,  image5(:,:,4), image5(:,:,5));
