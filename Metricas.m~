@@ -11,12 +11,12 @@ x_fec = x + 0.1;
 
 delay = [0.17275 0.11557 0.05831 0.038301 0.027681];
 delay_fec = [0.48769 0.20439 0.099892 0.060325 0.067377];
-delay_audio =[0 0 55.2040 53.5209];
+delay_audio =[];
 dd = [delay delay_fec];
 
 goodput = [35.5662 56.1636 105.3672 160.4129 221.9559];
 goodput_fec = [12.5982 30.0609 61.5067 101.8485 91.1879];
-goodput_audio=[0 0 111.2962 114.7962];
+goodput_audio=[];
 gg = [goodput goodput_fec];
 
 PER = [0 0 0 0 0];
@@ -26,8 +26,8 @@ pp = [PER PER_fec];
 
 BER = [0 0 0 0 0];
 BER_fec = [0 0 0 0 0];
-BER_audio=[0 0 0.4284 0.4180];
-BER_audio_FEC=[0 0  0.3802 0.3906];
+BER_audio=[0 0 0.4284 0];
+BER_audio_FEC=[0 0  0.3802 0];
 bb = [BER BER_fec];
 
 

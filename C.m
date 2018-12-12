@@ -3,7 +3,7 @@ confetings;
 
 %%Abrir imagen para comparar errores 
 imgOriginal0 = imread(img);
-[rowC,colC,profC] = size(imgOriginal);
+[rowC,colC,profC] = size(imgOriginal0);
 imgOriginal = incluirRedundancias(img);
 vectorOriginal =img2vector(imgOriginal);
 matrizOriginal = vector2packet(vectorOriginal, l_paquete);
@@ -13,7 +13,7 @@ paquetes_erroneos=0;
 
 matriz=[];
 
-%Recibir paquetes 
+%Recibir paquetes 55.2040
 %Configurar puertos
 clc
 disp(['Redundancias calculadas L_paquete = ' num2str(l_paquete)])
@@ -88,6 +88,7 @@ for i=1:packetes
 end
 PER_audio=PER_audio/packetes;
 goodput_audio=row*col*3*8/delay_audio;
+disp('metricas');
 
 %% Mostrar métricas
 matriz_FEC=[];
@@ -95,7 +96,7 @@ matriz_FEC(:,:,1:3)= image_audio;
 matriz_FEC(:,:,4)=image5(:,:,4);
 matriz_FEC(:,:,5) = image5(:,:,5);
 image_final = corregirErrores(matriz_FEC);
-
+B
 BER_conFEC=row*col*3-sum(sum(sum(imgOriginal(:,:,1:3)==image_final)));
 BER_conFEC=BER_conFEC/(row*col*3);
 packetes_audio_FEC = vector2packet(img2vector(image_final),l_paquete);
